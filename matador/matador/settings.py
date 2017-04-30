@@ -15,6 +15,11 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'accounts.User'
 
+LOCAL_APPS = [
+    'accounts',
+    'posts'
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -26,11 +31,9 @@ INSTALLED_APPS = [
     # Installed
     'rest_framework',
     'rest_framework.authtoken',
+    'django_extensions'
 
-    # Local apps
-    'accounts',
-    'posts'
-]
+] + LOCAL_APPS
 
 
 MIDDLEWARE = [
