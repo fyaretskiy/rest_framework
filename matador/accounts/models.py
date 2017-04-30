@@ -4,4 +4,3 @@ from django.db import models
 
 class User(AbstractUser):
     posts = models.ManyToManyField('posts.Post', through='posts.UserPost')
-
