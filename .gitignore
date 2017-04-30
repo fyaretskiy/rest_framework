@@ -15,6 +15,7 @@ tests/report/
 .idea/
 **/secrets.py
 **/local.py
+*.db
 
 shopping/.idea/
 
