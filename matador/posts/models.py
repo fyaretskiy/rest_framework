@@ -9,6 +9,9 @@ class Post(models.Model):
     title = models.TextField('title', null=True, blank=True)
     body = models.TextField('body', null=True, blank=True)
 
+    class Meta:
+        unique_together = ('user', 'data_post_id')
+
     @classmethod
     def get_post_for_user(cls, post_id, user):
         post = cls.objects.filter(user=user, data_post_id=post_id).first()
