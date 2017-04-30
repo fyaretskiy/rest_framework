@@ -15,13 +15,6 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'accounts.User'
 
-# Application definition
-
-LOCAL_APPS = [
-    'accounts',
-    'posts'
-]
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -29,7 +22,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-] + LOCAL_APPS
+
+    # Installed
+    'rest_framework',
+    'rest_framework.authtoken',
+
+    # Local apps
+    'accounts',
+    'posts'
+]
 
 
 MIDDLEWARE = [

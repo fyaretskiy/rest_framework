@@ -12,5 +12,5 @@ class UserPost(models.Model):
     """
     Through many to many model for extra customization.
     """
-    user_id = models.ForeignKey('accounts.User')
+    user_id = models.ForeignKey('users.User')
     post_id = models.ForeignKey(Post)
