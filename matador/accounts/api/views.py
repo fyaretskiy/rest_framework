@@ -26,20 +26,9 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response(status=status.HTTP_403_FORBIDDEN)
 
-    def update(self, request, *args, **kwargs):
-        """Skipping because user has no data to update."""
-
     def destroy(self, request, *args, **kwargs):
         if not request.user.is_authenticated():
             return Response(status=status.HTTP_400_BAD_REQUEST)
         User.objects.filter(id=request.user.pk).delete()
         Token.objects.filter(user=request.user).delete()
         return Response()
-
-    # def list(self, request, *args, **kwargs):
-    #     # fixme view users list from the data source
-    #     data = self.serializer_class(self.queryset, many=True).data
-    #     return Response(data)
-    #
-    # def get_object(self):
-    #     pass
