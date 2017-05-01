@@ -19,7 +19,6 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
     def create(self, request, *args, **kwargs):
-
         if not request.user.is_authenticated():
             user = User.objects.create_user(username=get_username())
             token = Token.objects.create(user=user)
@@ -31,13 +30,10 @@ class UserViewSet(viewsets.ModelViewSet):
         """Skipping because user has no data to update."""
 
     def destroy(self, request, *args, **kwargs):
-
-        if request.user.is_authenticated():
-            User.objects.filter(id=request.user.pk).delete()
-            Token.objects.filter(user=request.user).delete()
-        else:
+        if not request.user.is_authenticated():
             return Response(status=status.HTTP_400_BAD_REQUEST)
-
+        User.objects.filter(id=request.user.pk).delete()
+        Token.objects.filter(user=request.user).delete()
         return Response()
 
     # def list(self, request, *args, **kwargs):
