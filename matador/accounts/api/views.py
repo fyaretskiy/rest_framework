@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.utils.crypto import get_random_string
 from rest_framework import status, viewsets
 from rest_framework.authtoken.models import Token
@@ -36,7 +37,8 @@ class UserViewSet(viewsets.ModelViewSet):
         if not request.user.is_authenticated():
             user = User.objects.create_user(username=get_username())
             token = Token.objects.create(user=user)
-            return Response({'token': token.key})
+            return Response({'token': token.key},
+                            status=status.HTTP_201_CREATED)
 
         return Response(status=status.HTTP_403_FORBIDDEN)
 
@@ -44,3 +46,15 @@ class UserViewSet(viewsets.ModelViewSet):
         User.objects.filter(id=request.user.pk).delete()
         Token.objects.filter(user=request.user).delete()
         return Response()
+
+    def update(self, request, *args, **kwargs):
+        new_username = request.data['username']
+        try:
+            user = request.user
+            user.username = new_username
+            user.save()
+        except IntegrityError:
+            return Response({"response": "Username already exists."},
+                            status.HTTP_400_BAD_REQUEST, )
+        else:
+            return Response(self.serializer_class(user).data)
