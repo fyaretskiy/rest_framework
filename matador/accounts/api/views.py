@@ -58,3 +58,6 @@ class UserViewSet(viewsets.ModelViewSet):
                             status.HTTP_400_BAD_REQUEST, )
         else:
             return Response(self.serializer_class(user).data)
+
+    def retrieve(self, request, *args, **kwargs):
+        return Response(self.serializer_class(self.request.user).data)

@@ -5,5 +5,6 @@ from .views import UserViewSet
 urlpatterns = [
     url(r'users', UserViewSet.as_view({'post': 'create',
                                        'delete': 'destroy',
-                                       'patch': 'update'}))
+                                       'patch': 'update',
+                                       'get': 'retrieve'}))
 ]
