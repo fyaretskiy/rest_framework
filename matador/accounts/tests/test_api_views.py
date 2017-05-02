@@ -36,4 +36,4 @@ class UserViewSetTests(TransactionTestCase):
         # Test unauthorized delete.
         self.client.credentials()
         response = self.client.delete(self.path)
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 401)

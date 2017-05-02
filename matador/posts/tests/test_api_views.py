@@ -47,4 +47,4 @@ class PostViewSetTests(TransactionTestCase):
 
     def test_retrieve_not_authenticated(self):
         response = self.client.get(self.path)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
