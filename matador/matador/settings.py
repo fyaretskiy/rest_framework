@@ -117,6 +117,4 @@ REST_FRAMEWORK = {
     )
 }
 
-
-from .local import *  # noqa
-from .secrets import *  # noqa
+SECRET_KEY = 'secret_key'
